@@ -16,6 +16,9 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -27,6 +30,9 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static DriveTrain driveTrain = new DriveTrain();
+  static AHRS navX;
+
+  long startTime;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -37,6 +43,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    navX = new AHRS(SPI.Port.kMXP);
+    
     oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -114,6 +122,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    navX.reset();
+    startTime = System.nanoTime();
   }
 
   /**
@@ -121,6 +132,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    long time = System.nanoTime();
+    long ms = (time - startTime) / 1000000;
+    System.out.println(Long.toString(ms) + "," + Float.toString(navX.getRoll()) + "," + Float.toString(navX.getPitch()) + "," + Float.toString(navX.getYaw()));
     Scheduler.getInstance().run();
   }
 
