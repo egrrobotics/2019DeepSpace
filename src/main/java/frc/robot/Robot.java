@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DummyActuator;
+import frc.robot.subsystems.DummyPneumatic;
 import frc.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -27,6 +29,8 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static DriveTrain driveTrain = new DriveTrain();
+  public static DummyActuator dummyActuator = new DummyActuator();
+  public static DummyPneumatic dummyPneumatic = new DummyPneumatic();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
