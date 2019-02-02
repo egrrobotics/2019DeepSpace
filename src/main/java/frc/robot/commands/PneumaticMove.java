@@ -66,6 +66,6 @@ public class PneumaticMove extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    stop();
+    end();
   }
 }

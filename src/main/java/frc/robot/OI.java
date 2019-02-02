@@ -10,6 +10,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.PneumaticMove;
+import frc.robot.commands.PneumaticMove.PneumaticDirection;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -18,6 +22,19 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 
   public Joystick driver = new Joystick(0);
+
+  public OI() {
+    driverSetup();
+  }
+
+  private void driverSetup() {
+    Button buttonA = new JoystickButton(driver, 1);
+    Button buttonB = new JoystickButton(driver, 2);
+
+    buttonA.whileHeld(new PneumaticMove(PneumaticDirection.BACKWARD));
+    buttonB.whileHeld(new PneumaticMove(PneumaticDirection.FORWARD));
+  }
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

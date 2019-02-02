@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.hal.CompressorJNI;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,7 +21,7 @@ public class DummyPneumatic extends Subsystem {
   // here. Call these from Commands.
 
   DoubleSolenoid dummyDouble = new DoubleSolenoid(0, 1);
-  Compressor compressor = new Compressor(0);
+  public Compressor compressor = new Compressor(0);
 
   public DummyPneumatic() {
     dummyDouble.set(DoubleSolenoid.Value.kOff);
