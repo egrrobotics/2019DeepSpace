@@ -5,8 +5,6 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-// WOAH DUDE IT"S CODE
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
