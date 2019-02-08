@@ -24,4 +24,6 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static double encoderCountsPerInch = 207;
+  public static int leftBumper = 5;
+  public static int rightBumper = 6;
 }

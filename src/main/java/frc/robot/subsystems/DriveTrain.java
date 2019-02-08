@@ -24,10 +24,10 @@ public class DriveTrain extends Subsystem {
   TalonSRX right2; 
  
   public DriveTrain() {
-    left1 = new TalonSRX(1);
-    left2 = new TalonSRX(2);
-    right1 = new TalonSRX(3);
-    right2 = new TalonSRX(4); 
+    left1 = new TalonSRX(2);
+    left2 = new TalonSRX(3);
+    right1 = new TalonSRX(4);
+    right2 = new TalonSRX(5); 
     right1.setInverted(true);
     right2.setInverted(true);
   }

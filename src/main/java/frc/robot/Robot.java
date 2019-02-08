@@ -12,8 +12,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.ElevatorControl;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Sensors;
 
@@ -28,6 +30,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static DriveTrain driveTrain = new DriveTrain();
+  public static Elevator elevator = new Elevator();
   public static Sensors sensors = new Sensors();
 
   Command m_autonomousCommand;
@@ -113,6 +116,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
