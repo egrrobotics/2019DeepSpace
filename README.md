@@ -4,3 +4,5 @@
 This repository houses all code for the 2019 Deep Space game for our team, Team 5980. We seperate large changes into seperate branches to minimize breaking things, and merge when needed.
 
 Visit our [website](http://www.egrrobotics.org/)!
+
+### Visit our vision repo [here](https://github.com/egrrobotics/2019DeepSpace-VISION).
