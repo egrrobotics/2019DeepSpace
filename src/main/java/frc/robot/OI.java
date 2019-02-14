@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ElevatorControl;
+import frc.robot.commands.IntakeRollerControl;
+import frc.robot.commands.IntakeRotateControl;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,6 +23,7 @@ import frc.robot.commands.ElevatorControl;
 public class OI {
 
   public Joystick driver = new Joystick(0);
+  public Joystick operator = new Joystick(1);
 
   public OI() {
   //// CREATING BUTTONS
@@ -30,8 +33,12 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-   Button rightBumper = new JoystickButton(driver, RobotMap.rightBumper);
-   Button leftBumper = new JoystickButton(driver, RobotMap.leftBumper);
+   Button rightOpBumper = new JoystickButton(operator, RobotMap.rightBumper);
+   Button leftOpBumper = new JoystickButton(operator, RobotMap.leftBumper);
+   Button opAButton = new JoystickButton(operator, RobotMap.buttonA);
+   Button opBButton = new JoystickButton(operator, RobotMap.buttonB);
+   Button opXButton = new JoystickButton(operator, RobotMap.buttonX);
+   Button opYButton = new JoystickButton(operator, RobotMap.buttonY);
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
@@ -47,8 +54,12 @@ public class OI {
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
   // button.whileHeld(new ExampleCommand());
-    rightBumper.whileHeld(new ElevatorControl(1));
-    leftBumper.whileHeld(new ElevatorControl(-1));
+    rightOpBumper.whileHeld(new ElevatorControl(1));
+    leftOpBumper.whileHeld(new ElevatorControl(-1));
+    opAButton.whileHeld(new IntakeRollerControl(1));
+    opBButton.whileHeld(new IntakeRollerControl(-1));
+    opXButton.whileHeld(new IntakeRotateControl(1));
+    opYButton.whileHeld(new IntakeRotateControl(-1));
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());

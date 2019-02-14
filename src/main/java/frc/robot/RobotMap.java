@@ -26,4 +26,8 @@ public class RobotMap {
   public static double encoderCountsPerInch = 207;
   public static int leftBumper = 5;
   public static int rightBumper = 6;
+  public static int buttonA = 1;
+  public static int buttonB = 2;
+  public static int buttonX = 3;
+  public static int buttonY = 4;
 }
