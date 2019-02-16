@@ -25,6 +25,9 @@ public class ElevatorControl extends Command {
   @Override
   protected void execute() {
     Robot.elevator.setPower(Robot.oi.operator.getRawAxis(1));
+
+    // Log stuff
+    System.out.println(Robot.elevator.getCurrentHeight());
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -12,6 +12,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ElevatorSetHeight;
 import frc.robot.commands.IntakeRollerControl;
 import frc.robot.commands.IntakeRotateControl;
 
