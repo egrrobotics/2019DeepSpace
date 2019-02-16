@@ -33,19 +33,40 @@ public class DriveTrain extends Subsystem {
   }
 
   private double deadBand(double power) {
-    if(Math.abs(power) < .1) {
-      power = 0;
+    if(Math.abs(power) < 0.1) {
+      return 0;
     }
     return power;
   }
 
-  public void setPower(double leftPower, double rightPower) {
+  private void setLeftPower(double leftPower) {
     leftPower = deadBand(leftPower);
-    rightPower = deadBand(rightPower);
     left1.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, leftPower);
     left2.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, leftPower);
+  }
+
+  private void setRightPower(double rightPower) {
+    rightPower = deadBand(rightPower);
     right1.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, rightPower);
     right2.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, rightPower);
+  }
+
+  public void setPower(double power) {
+    setLeftPower(power);
+    setRightPower(power);
+  }
+  
+  public void setPower(double leftPower, double rightPower) {
+    setLeftPower(leftPower);
+    setRightPower(rightPower);
+  }
+
+  public int getLeftEncoder() {
+    return left1.getSelectedSensorPosition();
+  }
+
+  public int getRightEncoder() {
+    return right1.getSelectedSensorPosition();
   }
 
   @Override

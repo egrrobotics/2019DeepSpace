@@ -11,26 +11,26 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.ElevatorControl;
 
 /**
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
 
-  TalonSRX elevatorMotor;
+  TalonSRX elevatorMotor = new TalonSRX(6);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public Elevator() {
-    elevatorMotor = new TalonSRX(6);
-  }
+  public Elevator() {}
 
   public void setPower(double power) {
     elevatorMotor.set(ControlMode.PercentOutput, power);
   }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ElevatorControl());
   }
 }

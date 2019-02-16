@@ -37,8 +37,10 @@ public class HatchGrab extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    addSequential(new ElevatorControl(topHeight)); // Go to the upper height (slide the hatch up).
-    addSequential(new DriveForwardAuto(.5, backDistance, 0)); // Back up.
-    addSequential(new ElevatorControl(bottomHeight)); // Go to the lower height (return to normal).
+    /*
+    addSequential(new ElevatorSetHeight(topHeight));
+    addSequential(new DriveForwardAuto(.5, backDistance, 0));
+    addSequential(new ElevatorSetHeight(bottomHeight));
+    */
   }
 }

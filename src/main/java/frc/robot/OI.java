@@ -12,7 +12,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ElevatorControl;
 import frc.robot.commands.IntakeRollerControl;
 import frc.robot.commands.IntakeRotateControl;
 
@@ -21,47 +20,49 @@ import frc.robot.commands.IntakeRotateControl;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
+  // Driver controller setup
   public Joystick driver = new Joystick(0);
+  private Button driverButtonA = new JoystickButton(driver, 1);
+  private Button driverButtonB = new JoystickButton(driver, 2);
+  private Button driverButtonX = new JoystickButton(driver, 3);
+  private Button driverButtonY = new JoystickButton(driver, 4);
+  private Button driverButtonLeftBumper = new JoystickButton(driver, 5);
+  private Button driverButtonRightBumper = new JoystickButton(driver, 6);
+  private Button driverButtonBack = new JoystickButton(driver, 7);
+  private Button driverButtonStart = new JoystickButton(driver, 8);
+  private Button driverButtonLeftAxisPress = new JoystickButton(driver, 9);
+  private Button driverButtonRightAxisPress = new JoystickButton(driver, 10);
+
+  // Operator controller setup
   public Joystick operator = new Joystick(1);
+  private Button operatorButtonA = new JoystickButton(operator, 1);
+  private Button operatorButtonB = new JoystickButton(operator, 2);
+  private Button operatorButtonX = new JoystickButton(operator, 3);
+  private Button operatorButtonY = new JoystickButton(operator, 4);
+  private Button operatorButtonLeftBumper = new JoystickButton(operator, 5);
+  private Button operatorButtonRightBumper = new JoystickButton(operator, 6);
+  private Button operatorButtonBack = new JoystickButton(operator, 7);
+  private Button operatorButtonStart = new JoystickButton(operator, 8);
+  private Button operatorButtonLeftAxisPress = new JoystickButton(operator, 9);
+  private Button operatorButtonRightAxisPress = new JoystickButton(operator, 10);
 
   public OI() {
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
-   Button rightOpBumper = new JoystickButton(operator, RobotMap.rightBumper);
-   Button leftOpBumper = new JoystickButton(operator, RobotMap.leftBumper);
-   Button opAButton = new JoystickButton(operator, RobotMap.buttonA);
-   Button opBButton = new JoystickButton(operator, RobotMap.buttonB);
-   Button opXButton = new JoystickButton(operator, RobotMap.buttonX);
-   Button opYButton = new JoystickButton(operator, RobotMap.buttonY);
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-    rightOpBumper.whileHeld(new ElevatorControl(1));
-    leftOpBumper.whileHeld(new ElevatorControl(-1));
-    opAButton.whileHeld(new IntakeRollerControl(1));
-    opBButton.whileHeld(new IntakeRollerControl(-1));
-    opXButton.whileHeld(new IntakeRotateControl(1));
-    opYButton.whileHeld(new IntakeRotateControl(-1));
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
+    // DriveTrain default command is ArcadeDrive
+    // Elevator default command is ElevatorControl
+    // Intake default command is IntakeControl 
+    operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
+    operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
   }
+
+  public double getOperatorLeftTrigger() {
+		return operator.getRawAxis(2);
+	}
+
+	public double getOperatorRightTrigger() {
+		return operator.getRawAxis(3);
+	}
+
+	public double getOperatorTriggerDiff() {
+		return getOperatorLeftTrigger() - getOperatorRightTrigger();
+	}
 }

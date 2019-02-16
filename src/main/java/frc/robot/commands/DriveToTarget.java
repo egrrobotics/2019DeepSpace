@@ -79,11 +79,11 @@ public class DriveToTarget extends Command {
     left = new EncoderFollower(modifier.getLeftTrajectory());
     right = new EncoderFollower(modifier.getRightTrajectory());
 
-    left.configureEncoder(Robot.driveTrain.left1.getSelectedSensorPosition(), 4000, 0.1524); // 0.1524
-    right.configureEncoder(Robot.driveTrain.right1.getSelectedSensorPosition(), 4000, 0.1524); // 0.1524
+    left.configureEncoder(Robot.driveTrain.getLeftEncoder(), 4000, 0.1524); // 0.1524
+    right.configureEncoder(Robot.driveTrain.getRightEncoder(), 4000, 0.1524); // 0.1524
 
-    System.out.println(Robot.driveTrain.left1.getSelectedSensorPosition());
-    System.out.println(Robot.driveTrain.right1.getSelectedSensorPosition());
+    System.out.println(Robot.driveTrain.getLeftEncoder());
+    System.out.println(Robot.driveTrain.getRightEncoder());
 
     left.configurePIDVA(0.1, 0.0, 0.0, 1 / maxVel, 0);
     right.configurePIDVA(0.1, 0.0, 0.0, 1 / maxVel, 0);
@@ -99,8 +99,8 @@ public class DriveToTarget extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftPower = left.calculate(Robot.driveTrain.left1.getSelectedSensorPosition());
-    rightPower = right.calculate(Robot.driveTrain.right1.getSelectedSensorPosition());
+    leftPower = left.calculate(Robot.driveTrain.getLeftEncoder());
+    rightPower = right.calculate(Robot.driveTrain.getRightEncoder());
 
     // System.out.println(execCount++);
     // System.out.println(leftPower);
@@ -122,8 +122,8 @@ public class DriveToTarget extends Command {
   protected boolean isFinished() {
     if (left.isFinished() || right.isFinished()) {
       System.out.println("Done with path.");
-      System.out.println(Robot.driveTrain.left1.getSelectedSensorPosition());
-      System.out.println(Robot.driveTrain.right1.getSelectedSensorPosition());
+      System.out.println(Robot.driveTrain.getLeftEncoder());
+      System.out.println(Robot.driveTrain.getRightEncoder());
       return true;
     } else {
       return false;
