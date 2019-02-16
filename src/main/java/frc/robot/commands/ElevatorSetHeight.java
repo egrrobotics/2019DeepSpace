@@ -29,17 +29,17 @@ public class ElevatorSetHeight extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.elevator.getCurrentHeight() < targetHeight) {
-      Robot.elevator.setPower(0.5);
-    } else {
-      Robot.elevator.setPower(-0.5);
-    }
+    double error = targetHeight - Robot.elevator.getCurrentHeight();
+    double power = error * 0.005;
+    power = Math.min(0.5, power);
+    power = Math.max(-0.5, power);
+    Robot.elevator.setPower(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(Robot.elevator.getCurrentHeight() - targetHeight) < 25;
+    return Math.abs(Robot.elevator.getCurrentHeight() - targetHeight) < 5;
   }
 
   // Called once after isFinished returns true
