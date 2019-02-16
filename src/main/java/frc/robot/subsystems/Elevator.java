@@ -28,6 +28,10 @@ public class Elevator extends Subsystem {
     elevatorMotor.set(ControlMode.PercentOutput, power);
   }
 
+  public double getCurrentHeight() {
+    return elevatorMotor.getSelectedSensorPosition();
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

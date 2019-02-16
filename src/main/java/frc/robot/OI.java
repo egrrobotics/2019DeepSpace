@@ -52,6 +52,12 @@ public class OI {
     // Intake default command is IntakeControl 
     operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
     operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
+
+    // New code for elevator "snaps"
+    // Order, lowest to highest: A, B, Y
+    operatorButtonA.whenPressed(new ElevatorSetHeight(500)); // Bottom rocket hole
+    operatorButtonB.whenPressed(new ElevatorSetHeight(1000)); // Middle rocket hole
+    operatorButtonY.whenPressed(new ElevatorSetHeight(1500)); // Top rocket hole
   }
 
   public double getOperatorLeftTrigger() {
