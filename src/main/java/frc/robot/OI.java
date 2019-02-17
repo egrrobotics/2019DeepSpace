@@ -12,6 +12,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ElevatorSetHeight;
 import frc.robot.commands.IntakePop;
 import frc.robot.commands.IntakeRollerControl;
 import frc.robot.commands.IntakeRotateControl;
@@ -53,6 +54,11 @@ public class OI {
     // Intake default command is IntakeControl 
     operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
     operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
+
+    operatorButtonA.whenPressed(new ElevatorSetHeight(500)); // Bottom rocket hole
+    operatorButtonB.whenPressed(new ElevatorSetHeight(1000)); // Middle rocket hole
+    operatorButtonY.whenPressed(new ElevatorSetHeight(1500)); // Top rocket hole
+    
     driverButtonRightBumper.whileHeld(new IntakePop());
   }
 

@@ -10,10 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ElevatorControl extends Command {
-  public ElevatorControl() {
+public class ElevatorSetHeight extends Command {
+  double targetHeight;
+
+  public ElevatorSetHeight(double height) {
     // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+
     requires(Robot.elevator);
+    targetHeight = height;
   }
 
   // Called just before this Command runs the first time
@@ -24,16 +29,17 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.setPower(Robot.oi.operator.getRawAxis(1));
-
-    // Log stuff
-    System.out.println(Robot.elevator.getCurrentHeight());
+    double error = targetHeight - Robot.elevator.getCurrentHeight();
+    double power = error * 0.005;
+    power = Math.min(0.5, power);
+    power = Math.max(-0.5, power);
+    Robot.elevator.setPower(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Math.abs(Robot.elevator.getCurrentHeight() - targetHeight) < 5;
   }
 
   // Called once after isFinished returns true
