@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ElevatorSetHeight;
+import frc.robot.commands.IntakePop;
 import frc.robot.commands.IntakeRollerControl;
 import frc.robot.commands.IntakeRotateControl;
 
@@ -54,11 +55,11 @@ public class OI {
     operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
     operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
 
-    // New code for elevator "snaps"
-    // Order, lowest to highest: A, B, Y
     operatorButtonA.whenPressed(new ElevatorSetHeight(500)); // Bottom rocket hole
     operatorButtonB.whenPressed(new ElevatorSetHeight(1000)); // Middle rocket hole
     operatorButtonY.whenPressed(new ElevatorSetHeight(1500)); // Top rocket hole
+    
+    driverButtonRightBumper.whileHeld(new IntakePop());
   }
 
   public double getOperatorLeftTrigger() {
