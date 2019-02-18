@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElevatorControl extends Command {
+
   public ElevatorControl() {
-    // Use requires() here to declare subsystem dependencies
     requires(Robot.elevator);
+
+    Robot.elevator.elevatorMotor.setSelectedSensorPosition(0);
   }
 
   // Called just before this Command runs the first time
@@ -24,10 +26,17 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.setPower(Robot.oi.operator.getRawAxis(1));
+    double manualAdjust = Robot.oi.operator.getRawAxis(1);
+    if (Math.abs(manualAdjust) > 0.1) {
+      Robot.elevator.setTargetHeight(Robot.elevator.targetHeight + manualAdjust * -25);
+    }
 
-    // Log stuff
-    System.out.println(Robot.elevator.getCurrentHeight());
+    // Prevent tipping
+    if(Math.abs(Robot.sensors.getPitch()) > 10) {
+      Robot.elevator.setTargetHeight(500);
+    }
+
+    Robot.elevator.moveTowardTarget();
   }
 
   // Make this return true when this Command no longer needs to run execute()

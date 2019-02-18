@@ -18,18 +18,40 @@ import frc.robot.commands.ElevatorControl;
  */
 public class Elevator extends Subsystem {
 
-  TalonSRX elevatorMotor = new TalonSRX(6);
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  public TalonSRX elevatorMotor = new TalonSRX(6);
+  public double targetHeight = 0;
 
   public Elevator() {}
 
   public void setPower(double power) {
-    elevatorMotor.set(ControlMode.PercentOutput, power);
+    // Min/max
+    power = Math.min(1.0, power);
+    power = Math.max(-1.0, power);
+
+    // Deadband
+    if (Math.abs(power) < 0.1) {
+      power = 0;
+    } else if (Math.abs(power) < 0.2) {
+      power = (power < 0) ? -0.2 : 0.2;
+    }
+
+    elevatorMotor.set(ControlMode.PercentOutput, -power);
   }
 
-  public double getCurrentHeight() {
-    return elevatorMotor.getSelectedSensorPosition();
+  public double getHeight() {
+    return -elevatorMotor.getSelectedSensorPosition();
+  }
+
+  public void setTargetHeight(double height) {
+    double min = -500;
+    double max = 3200;
+    targetHeight = Math.max(min, Math.min(max, height));
+  }
+
+  public void moveTowardTarget() {
+    double error = targetHeight - getHeight();
+    double power = error * 0.005;
+    setPower(power);
   }
 
   @Override

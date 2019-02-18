@@ -55,9 +55,9 @@ public class OI {
     operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
     operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
 
-    operatorButtonA.whenPressed(new ElevatorSetHeight(500)); // Bottom rocket hole
-    operatorButtonB.whenPressed(new ElevatorSetHeight(1000)); // Middle rocket hole
-    operatorButtonY.whenPressed(new ElevatorSetHeight(1500)); // Top rocket hole
+    operatorButtonA.whenPressed(new ElevatorSetHeight(415));
+    operatorButtonB.whenPressed(new ElevatorSetHeight(1700));
+    operatorButtonY.whenPressed(new ElevatorSetHeight(2930));
     
     driverButtonRightBumper.whileHeld(new IntakePop());
   }
