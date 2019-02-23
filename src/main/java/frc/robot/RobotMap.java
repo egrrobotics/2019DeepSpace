@@ -24,4 +24,21 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static double encoderCountsPerInch = 207;
+
+  // Drivetrain Talons
+  public static int driveLeft1 = 2;
+  public static int driveLeft2 = 3;
+  public static int driveRight1 = 4;
+  public static int driveRight2 = 5;
+
+  // Elevator Talons
+  public static int elevator = 6;
+
+  // Intake Talons
+  public static int intakeRoller = 7;
+  public static int intakeRotate = 8;
+
+  // Pneumatic IDs
+  public static int PCM = 1;
+  public static int popperSolenoid = 0;
 }

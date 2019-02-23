@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorControl;
 
 /**
@@ -18,15 +19,15 @@ import frc.robot.commands.ElevatorControl;
  */
 public class Elevator extends Subsystem {
 
-  public TalonSRX elevatorMotor = new TalonSRX(6);
+  public TalonSRX elevatorMotor = new TalonSRX(RobotMap.elevator);
   public double targetHeight = 0;
 
   public Elevator() {}
 
   public void setPower(double power) {
     // Min/max
-    power = Math.min(1.0, power);
-    power = Math.max(-1.0, power);
+    power = Math.min(0.5, power);
+    power = Math.max(-0.5, power);
 
     // Deadband
     if (Math.abs(power) < 0.1) {

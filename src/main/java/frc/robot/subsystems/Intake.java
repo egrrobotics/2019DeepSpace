@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.IntakeControl;
 
 /**
@@ -22,8 +23,8 @@ public class Intake extends Subsystem {
   TalonSRX roller;
   TalonSRX rotateMotor;
   public Intake() {
-    roller = new TalonSRX(7);
-    rotateMotor = new TalonSRX(8);
+    roller = new TalonSRX(RobotMap.intakeRoller);
+    rotateMotor = new TalonSRX(RobotMap.intakeRotate);
   }
 
   public void setRollerPower(double power) {

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 
 /**
@@ -24,10 +25,10 @@ public class DriveTrain extends Subsystem {
   TalonSRX right2; 
  
   public DriveTrain() {
-    left1 = new TalonSRX(2);
-    left2 = new TalonSRX(3);
-    right1 = new TalonSRX(4);
-    right2 = new TalonSRX(5); 
+    left1 = new TalonSRX(RobotMap.driveLeft1);
+    left2 = new TalonSRX(RobotMap.driveLeft2);
+    right1 = new TalonSRX(RobotMap.driveRight1);
+    right2 = new TalonSRX(RobotMap.driveRight2); 
     right1.setInverted(true);
     right2.setInverted(true);
   }

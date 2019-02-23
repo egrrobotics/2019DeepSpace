@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -18,11 +19,12 @@ public class Pneumatics extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public Compressor compressor = new Compressor(1);
-  Solenoid intakePop = new Solenoid(1, 0);
+  public Compressor compressor = new Compressor(RobotMap.PCM);
+  Solenoid intakePop = new Solenoid(RobotMap.PCM, RobotMap.popperSolenoid);
 
   public Pneumatics() {
-    compressor.start();
+    // compressor.start();
+    compressor.stop();
   }
 
   public void setIntakePop(boolean extended) {
