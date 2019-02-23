@@ -12,6 +12,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.DriveToTarget;
 import frc.robot.commands.ElevatorSetHeight;
 import frc.robot.commands.IntakePop;
 import frc.robot.commands.IntakeRollerControl;
@@ -60,6 +61,8 @@ public class OI {
     operatorButtonY.whenPressed(new ElevatorSetHeight(2930));
     
     driverButtonRightBumper.whileHeld(new IntakePop());
+
+    driverButtonStart.whenPressed(new DriveToTarget());
   }
 
   public double getOperatorLeftTrigger() {

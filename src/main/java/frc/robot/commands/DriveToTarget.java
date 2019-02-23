@@ -20,7 +20,11 @@ public class DriveToTarget extends Command {
 
   // NetworkTable tapeTable;
 
-  double maxVel = 2.8;
+  double maxSpeedFactor = 0.75;
+
+  double maxVel = 2.115 * maxSpeedFactor; // 2.8;
+  double maxAccel = 3.05 * Math.pow(maxSpeedFactor, 2); // 3.05
+  double maxJerk = 100.0 * Math.pow(maxSpeedFactor, 3);
   
   Waypoint[] points;
   Trajectory.Config config;
@@ -57,12 +61,14 @@ public class DriveToTarget extends Command {
 
     System.out.println("Starting tank path generation.");
 
+    double forwardDist = 1.6; // 2.7305;
+    double horizDist = 0;
     double angle = Pathfinder.d2r(Robot.sensors.getYaw());
     points = new Waypoint[] {
       new Waypoint(0.0, 0.0, angle),
       new Waypoint(
-        Math.cos(angle) * 2 + Math.cos(angle + Math.PI / 2) * 0,
-        Math.sin(angle) * 2 + Math.sin(angle + Math.PI / 2) * 0,
+        Math.cos(angle) * forwardDist + Math.cos(angle + Math.PI / 2) * horizDist,
+        Math.sin(angle) * forwardDist + Math.sin(angle + Math.PI / 2) * horizDist,
         angle
       )
     };
@@ -70,23 +76,31 @@ public class DriveToTarget extends Command {
     config = new Trajectory.Config(
       Trajectory.FitMethod.HERMITE_CUBIC,
       Trajectory.Config.SAMPLES_LOW,
-      0.02, maxVel, 3.05, 50.0
+      0.02, maxVel, maxAccel, maxJerk
     );
 
     trajectory = Pathfinder.generate(points, config);
-    modifier = new TankModifier(trajectory).modify(0.5);
+    modifier = new TankModifier(trajectory).modify(0.4);
+
+    if (left != null) {
+      left.reset();
+    }
+
+    if (right != null) {
+      right.reset();
+    }
 
     left = new EncoderFollower(modifier.getLeftTrajectory());
     right = new EncoderFollower(modifier.getRightTrajectory());
 
-    left.configureEncoder(Robot.driveTrain.getLeftEncoder(), 4000, 0.1524); // 0.1524
-    right.configureEncoder(Robot.driveTrain.getRightEncoder(), 4000, 0.1524); // 0.1524
+    left.configureEncoder(Robot.driveTrain.getLeftEncoder(), 4000, 9999999); // 0.1524); // 4000, 0.1524
+    right.configureEncoder(Robot.driveTrain.getRightEncoder(), 4000, 9999999); // 0.1524); // 4000, 0.1524
 
     System.out.println(Robot.driveTrain.getLeftEncoder());
     System.out.println(Robot.driveTrain.getRightEncoder());
 
-    left.configurePIDVA(0.1, 0.0, 0.0, 1 / maxVel, 0);
-    right.configurePIDVA(0.1, 0.0, 0.0, 1 / maxVel, 0);
+    left.configurePIDVA(0.2 * maxSpeedFactor, 0.0, 0.0, 1 / maxVel, 0);
+    right.configurePIDVA(0.2 * maxSpeedFactor, 0.0, 0.0, 1 / maxVel, 0);
 
     long endTime = System.currentTimeMillis();
 
@@ -111,10 +125,16 @@ public class DriveToTarget extends Command {
     double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
     double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
 
+    System.out.println(leftPower);
+    System.out.println(rightPower);
+
     // System.out.println((System.nanoTime() - lastExecTime) / 1000000);
     // lastExecTime = System.nanoTime();
 
-    Robot.driveTrain.setPower(leftPower + turn, rightPower - turn);
+    Robot.driveTrain.setPower(
+      leftPower * maxSpeedFactor + turn,
+      rightPower * maxSpeedFactor - turn
+    );
   }
 
   // Make this return true when this Command no longer needs to run execute()
