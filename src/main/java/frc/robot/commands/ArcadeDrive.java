@@ -45,6 +45,8 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.oi.setDriverRumble(Robot.tapeTable.getEntry("tapeInView").getBoolean(false));
+
     throttle = deadBand(-Robot.oi.driver.getRawAxis(1));
     wheel = deadBand(Robot.oi.driver.getRawAxis(4));
     leftPower = clip(throttle + wheel);
@@ -61,11 +63,13 @@ public class ArcadeDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.oi.setDriverRumble(false);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.oi.setDriverRumble(false);
   }
 }

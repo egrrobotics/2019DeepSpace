@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -35,6 +37,8 @@ public class Robot extends TimedRobot {
   public static Sensors sensors = new Sensors();
   public static Intake intake = new Intake();
   public static Pneumatics pneumatics = new Pneumatics();
+  public static NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
+  public static NetworkTable tapeTable;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -48,6 +52,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
+    tapeTable = Robot.networkTableInstance.getTable("ReflectiveTapeContours");
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
