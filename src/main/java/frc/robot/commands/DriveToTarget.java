@@ -33,9 +33,11 @@ public class DriveToTarget extends Command {
       double distToTape = Robot.tapeTable.getEntry("estDist").getDouble(30);
       System.out.println(pairCenterX);
 
-      double baseSpeed = 0.00444 * distToTape + 0.26667; // Fast (far) -> slow (close)
+      // double baseSpeed = 0.00444 * distToTape + 0.26667; // Fast (far) -> slow (close)
       // Set turnSpeed as % of baseSpeed:
-      double turnSpeed = baseSpeed * (-0.00222 * distToTape + 0.56667); // Smooth (far) -> agressive (close)
+      // double turnSpeed = baseSpeed * (-0.00222 * distToTape + 0.56667); // Smooth (far) -> agressive (close)
+      double baseSpeed = 0.4;
+      double turnSpeed = 0.2;
       Robot.driveTrain.setPower(
         baseSpeed + turnSpeed * (2 * pairCenterX),
         baseSpeed - turnSpeed * (2 * pairCenterX)
