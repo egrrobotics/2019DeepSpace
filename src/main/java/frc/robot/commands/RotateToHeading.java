@@ -8,11 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.utils.PID;
 
 public class RotateToHeading extends Command {
-  PID rotatePID = new PID(.2, 0, 0); //change speed: .35 for 90, .6 for 30, inter/extrapolate from there
+    PID rotatePID = new PID(.045, 0, .19); //change speed: .35 for 90, .6 for 30, inter/extrapolate from there
 	int heading;
 	double speed;
 	long stopTime;
@@ -60,6 +61,6 @@ public class RotateToHeading extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
+    	Robot.driveTrain.setPower(0);    	
     }
 }

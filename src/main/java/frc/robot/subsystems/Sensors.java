@@ -74,14 +74,14 @@ public class Sensors extends Subsystem {
 		return pitch;
 	}
 	
-	private int getLeftEncoderPosition() {
+	public int getLeftEncoderPosition() {
 		if (this.usingTalonEncoders)
 			return -Robot.driveTrain.left1.getSelectedSensorPosition(0);
 		else
 			return this.leftEncoder.get();
 	}
 	
-	private int getRightEncoderPosition() {
+	public int getRightEncoderPosition() {
 		if (this.usingTalonEncoders)
 			return -Robot.driveTrain.right1.getSelectedSensorPosition(0);
 		else
@@ -121,8 +121,7 @@ public class Sensors extends Subsystem {
 	}
 	
 	public void resetYaw() {
-		navX.zeroYaw();
-		yawOffset = navX.getYaw();
+		navX.reset();
 	}
 	
 	public void resetLeftEncoder() {

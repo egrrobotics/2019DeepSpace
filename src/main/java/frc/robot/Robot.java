@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.SandstormAuto;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     tapeTable = Robot.networkTableInstance.getTable("ReflectiveTapeContours");
     SmartDashboard.putData("Auto mode", m_chooser);
+    Robot.sensors.resetYaw();
   }
 
   /**
@@ -95,7 +97,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = new SandstormAuto();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
