@@ -5,8 +5,6 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-// WOAH DUDE IT"S CODE
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -15,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DriveToTarget;
 import frc.robot.commands.ElevatorSetHeight;
+import frc.robot.commands.HatchGrabberToggle;
+import frc.robot.commands.IntakeExtenderToggle;
 import frc.robot.commands.IntakePop;
 import frc.robot.commands.IntakeRollerControl;
 import frc.robot.commands.IntakeRotateControl;
@@ -24,7 +24,7 @@ import frc.robot.commands.IntakeRotateControl;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  // Driver controller setup
+  // Driver xbox controller
   public Joystick driver = new Joystick(0);
   private Button driverButtonA = new JoystickButton(driver, 1);
   private Button driverButtonB = new JoystickButton(driver, 2);
@@ -37,8 +37,8 @@ public class OI {
   private Button driverButtonLeftAxisPress = new JoystickButton(driver, 9);
   private Button driverButtonRightAxisPress = new JoystickButton(driver, 10);
 
-  // Operator controller setup
-  public Joystick operator = new Joystick(1);
+  // Operator xbox controller
+  public Joystick operator = new Joystick(3);
   private Button operatorButtonA = new JoystickButton(operator, 1);
   private Button operatorButtonB = new JoystickButton(operator, 2);
   private Button operatorButtonX = new JoystickButton(operator, 3);
@@ -50,32 +50,66 @@ public class OI {
   private Button operatorButtonLeftAxisPress = new JoystickButton(operator, 9);
   private Button operatorButtonRightAxisPress = new JoystickButton(operator, 10);
 
+  // Operator button board (two controllers 1)
+  public Joystick buttonBoardPart1 = new Joystick(1);
+  private Button buttonBoard1 = new JoystickButton(buttonBoardPart1, 1);
+  private Button buttonBoard2 = new JoystickButton(buttonBoardPart1, 2);
+  private Button buttonBoard3 = new JoystickButton(buttonBoardPart1, 3);
+  private Button buttonBoard4 = new JoystickButton(buttonBoardPart1, 4);
+  private Button buttonBoard5 = new JoystickButton(buttonBoardPart1, 5);
+  private Button buttonBoard6 = new JoystickButton(buttonBoardPart1, 6);
+  private Button buttonBoard7 = new JoystickButton(buttonBoardPart1, 7);
+  private Button buttonBoard8 = new JoystickButton(buttonBoardPart1, 8);
+  private Button buttonBoard9 = new JoystickButton(buttonBoardPart1, 9);
+  private Button buttonBoard10 = new JoystickButton(buttonBoardPart1, 10);
+  private Button buttonBoard11 = new JoystickButton(buttonBoardPart1, 11);
+  private Button buttonBoard12 = new JoystickButton(buttonBoardPart1, 12);
+
+  public Joystick buttonBoardPart2 = new Joystick(2);
+  private Button buttonBoard13 = new JoystickButton(buttonBoardPart2, 1);
+  private Button buttonBoard14 = new JoystickButton(buttonBoardPart2, 2);
+  private Button buttonBoard15 = new JoystickButton(buttonBoardPart2, 3);
+
   public OI() {
     // DriveTrain default command is ArcadeDrive
     // Elevator default command is ElevatorControl
-    // Intake default command is IntakeControl 
-    operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
-    operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
 
-    operatorButtonA.whenPressed(new ElevatorSetHeight(415));
-    operatorButtonB.whenPressed(new ElevatorSetHeight(1700));
-    operatorButtonY.whenPressed(new ElevatorSetHeight(2930));
-    
+    // Hatch presets
+    buttonBoard1.whenPressed(new ElevatorSetHeight(415));
+    buttonBoard2.whenPressed(new ElevatorSetHeight(1700));
+    buttonBoard3.whenPressed(new ElevatorSetHeight(2930));
+
+    // Ball presets
+    buttonBoard4.whenPressed(new ElevatorSetHeight(615));
+    buttonBoard5.whenPressed(new ElevatorSetHeight(1900));
+    buttonBoard6.whenPressed(new ElevatorSetHeight(3130));
+
+    // Ground, cargo bay presets
+    buttonBoard7.whenPressed(new ElevatorSetHeight(-50));
+    buttonBoard8.whenPressed(new ElevatorSetHeight(1500));
+
+    // Elevator manual
+    buttonBoard9.whileHeld(new ElevatorSetHeight(true));
+    buttonBoard10.whileHeld(new ElevatorSetHeight(false));
+
+    // Intake open/close
+    buttonBoard11.whileHeld(new IntakeRollerControl(-1));
+    buttonBoard12.whileHeld(new IntakeRollerControl(1));
+
+    // Intake roller
+    buttonBoard13.whileHeld(new IntakeRotateControl(-1));
+    buttonBoard14.whileHeld(new IntakeRotateControl(1));
+
+    // Climb
+    buttonBoard15.whenPressed();
+
+    // Driver intake controls
     driverButtonRightBumper.whileHeld(new IntakePop());
+    driverButtonLeftBumper.whenPressed(new IntakeExtenderToggle());
+    driverButtonB.whenPressed(new HatchGrabberToggle());
 
+    // Driver vision
     driverButtonA.whileHeld(new DriveToTarget());
-  }
-
-  public double getOperatorLeftTrigger() {
-		return operator.getRawAxis(2);
-	}
-
-	public double getOperatorRightTrigger() {
-		return operator.getRawAxis(3);
-	}
-
-	public double getOperatorTriggerDiff() {
-		return getOperatorLeftTrigger() - getOperatorRightTrigger();
   }
   
   public void setDriverRumble(boolean on) {

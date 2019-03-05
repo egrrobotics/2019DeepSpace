@@ -26,11 +26,6 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double manualAdjust = Robot.oi.operator.getRawAxis(1);
-    if (Math.abs(manualAdjust) > 0.1) {
-      Robot.elevator.setTargetHeight(Robot.elevator.targetHeight + manualAdjust * -25);
-    }
-
     // Prevent tipping
     if(Math.abs(Robot.sensors.getPitch()) > 10) {
       Robot.elevator.setTargetHeight(500);

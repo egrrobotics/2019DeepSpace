@@ -41,4 +41,6 @@ public class RobotMap {
   // Pneumatic IDs
   public static int PCM = 1;
   public static int popperSolenoid = 0;
+  public static int hatchGrabberSolenoid = 1;
+  public static int intakeExtenderSolenoid = 2;
 }

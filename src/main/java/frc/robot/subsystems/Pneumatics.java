@@ -20,7 +20,14 @@ public class Pneumatics extends Subsystem {
   // here. Call these from Commands.
 
   public Compressor compressor = new Compressor(RobotMap.PCM);
+
   Solenoid intakePop = new Solenoid(RobotMap.PCM, RobotMap.popperSolenoid);
+
+  Solenoid hatchGrabber = new Solenoid(RobotMap.PCM, RobotMap.hatchGrabberSolenoid);
+  boolean hatchGrabberOpen = false;
+
+  Solenoid intakeExtender = new Solenoid(RobotMap.PCM, RobotMap.intakeExtenderSolenoid);
+  boolean intakeExtenderOpen = false;
 
   public Pneumatics() {
     // compressor.start();
@@ -29,6 +36,16 @@ public class Pneumatics extends Subsystem {
 
   public void setIntakePop(boolean extended) {
     intakePop.set(extended);
+  }
+
+  public void toggleHatchGrabber() {
+    hatchGrabberOpen = !hatchGrabberOpen;
+    hatchGrabber.set(hatchGrabberOpen);
+  }
+
+  public void toggleIntakeExtended() {
+    intakeExtenderOpen = !intakeExtenderOpen;
+    intakeExtender.set(intakeExtenderOpen);
   }
 
   @Override

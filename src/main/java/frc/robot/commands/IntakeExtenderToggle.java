@@ -10,26 +10,24 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ElevatorSetHeight extends InstantCommand {
-
-  double target;
-
-  public ElevatorSetHeight(double target) {
+/**
+ * Add your docs here.
+ */
+public class IntakeExtenderToggle extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public IntakeExtenderToggle() {
     super();
-    requires(Robot.elevator);
-    this.target = target;
-  }
-
-  public ElevatorSetHeight(boolean up) {
-    super();
-    requires(Robot.elevator);
-    this.target = Robot.elevator.targetHeight + (up ? 12 : -12);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.pneumatics);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.elevator.setTargetHeight(target);
+    Robot.pneumatics.toggleIntakeExtended();
   }
 
 }
