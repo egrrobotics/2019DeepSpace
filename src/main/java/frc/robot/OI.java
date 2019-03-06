@@ -76,7 +76,7 @@ public class OI {
 
     // Hatch presets
     buttonBoard1.whenPressed(new ElevatorSetHeight(415));
-    buttonBoard2.whenPressed(new ElevatorSetHeight(1700));
+    buttonBoard2.whenPressed(new ElevatorSetHeight(1700)); // Also change height in Sandstorm
     buttonBoard3.whenPressed(new ElevatorSetHeight(2930));
 
     // Ball presets
@@ -101,7 +101,7 @@ public class OI {
     buttonBoard14.whileHeld(new IntakeRotateControl(1));
 
     // Climb
-    buttonBoard15.whenPressed();
+    // buttonBoard15.whenPressed();
 
     // Driver intake controls
     driverButtonRightBumper.whileHeld(new IntakePop());

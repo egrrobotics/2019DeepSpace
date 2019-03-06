@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class SandstormAuto extends CommandGroup {
   /**
@@ -31,8 +32,19 @@ public class SandstormAuto extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    addSequential(new DriveForwardAuto(0.5, 134, 0));
-    addSequential(new RotateToHeading(90, 0.5));
-    addSequential(new DriveForwardAuto(0.5, 50, 90));
+    addSequential(new DriveForwardAuto(0.5, 47, 0));
+    addSequential(new RotateToHeading(25, 0.5));
+    addSequential(new DriveForwardAuto(0.5, 183, 25));
+    addSequential(new RotateToHeading(155, 0.5));
+    addSequential(new ElevatorSetHeight(1700));
+    addSequential(new DriveForwardAuto(0.5, 24, 155));
+    addSequential(new WaitCommand(0.5));
+    addSequential(new ElevatorSetHeight(0));
+    addSequential(new WaitCommand(0.5));
+    addSequential(new DriveBackwardAuto(0.5, 35, 155));
+    addSequential(new RotateToHeading(-160, 0.5));
+    addSequential(new DriveForwardAuto(0.5, 100, -160));
+    addSequential(new RotateToHeading(165, 0.5));
+    addSequential(new DriveForwardAuto(0.5, 130, 165));
   }
 }

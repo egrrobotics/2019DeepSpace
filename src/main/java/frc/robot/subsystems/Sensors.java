@@ -51,13 +51,18 @@ public class Sensors extends Subsystem {
 	}
 	
 	public float getYaw() {
+		return getYaw(true);
+	}
+	public float getYaw(boolean preserve180) {
 		float yaw;
 		yaw = -(navX.getYaw() - yawOffset);
-		while(yaw > 180.0f) {
-			yaw-=360.0f;
-		}
-		while (yaw < -180.0f) {
-			yaw+=360.0f;
+		if (preserve180){
+			while(yaw > 180.0f) {
+				yaw-=360.0f;
+			}
+			while (yaw < -180.0f) {
+				yaw+=360.0f;
+			}
 		}
 		return yaw;
 	}
