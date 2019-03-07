@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new SandstormAuto();
+    m_autonomousCommand = new SandstormAuto(SandstormAuto.AutoType.LEFT);
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",

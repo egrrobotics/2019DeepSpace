@@ -92,11 +92,11 @@ public class OI {
     buttonBoard9.whileHeld(new ElevatorSetHeight(true));
     buttonBoard10.whileHeld(new ElevatorSetHeight(false));
 
-    // Intake open/close
+    // Intake roller
     buttonBoard11.whileHeld(new IntakeRollerControl(-1));
     buttonBoard12.whileHeld(new IntakeRollerControl(1));
 
-    // Intake roller
+    // Intake open/close
     buttonBoard13.whileHeld(new IntakeRotateControl(-1));
     buttonBoard14.whileHeld(new IntakeRotateControl(1));
 
