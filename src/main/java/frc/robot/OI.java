@@ -69,39 +69,40 @@ public class OI {
   private Button buttonBoard13 = new JoystickButton(buttonBoardPart2, 1);
   private Button buttonBoard14 = new JoystickButton(buttonBoardPart2, 2);
   private Button buttonBoard15 = new JoystickButton(buttonBoardPart2, 3);
+  private Button buttonBoard22 = new JoystickButton(buttonBoardPart2, 10);
 
   public OI() {
     // DriveTrain default command is ArcadeDrive
     // Elevator default command is ElevatorControl
 
     // Hatch presets
-    buttonBoard1.whenPressed(new ElevatorSetHeight(415));
-    buttonBoard2.whenPressed(new ElevatorSetHeight(1700)); // Also change height in Sandstorm
-    buttonBoard3.whenPressed(new ElevatorSetHeight(2930));
+    buttonBoard13.whenPressed(new ElevatorSetHeight(415));
+    buttonBoard11.whenPressed(new ElevatorSetHeight(1700)); // Also change height in Sandstorm
+    buttonBoard10.whenPressed(new ElevatorSetHeight(2930));
 
     // Ball presets
-    buttonBoard4.whenPressed(new ElevatorSetHeight(615));
-    buttonBoard5.whenPressed(new ElevatorSetHeight(1900));
-    buttonBoard6.whenPressed(new ElevatorSetHeight(3130));
+    buttonBoard9.whenPressed(new ElevatorSetHeight(615));
+    buttonBoard8.whenPressed(new ElevatorSetHeight(1900));
+    buttonBoard7.whenPressed(new ElevatorSetHeight(3130));
 
     // Ground, cargo bay presets
-    buttonBoard7.whenPressed(new ElevatorSetHeight(-50));
-    buttonBoard8.whenPressed(new ElevatorSetHeight(1500));
+    buttonBoard6.whenPressed(new ElevatorSetHeight(-50));
+    buttonBoard1.whenPressed(new ElevatorSetHeight(1500));
 
     // Elevator manual
-    buttonBoard9.whileHeld(new ElevatorSetHeight(true));
-    buttonBoard10.whileHeld(new ElevatorSetHeight(false));
+    buttonBoard15.whileHeld(new ElevatorSetHeight(true));
+    buttonBoard14.whileHeld(new ElevatorSetHeight(false));
 
     // Intake roller
-    buttonBoard11.whileHeld(new IntakeRollerControl(-1));
-    buttonBoard12.whileHeld(new IntakeRollerControl(1));
+    buttonBoard3.whileHeld(new IntakeRollerControl(-1));
+    buttonBoard2.whileHeld(new IntakeRollerControl(1));
 
     // Intake open/close
-    buttonBoard13.whileHeld(new IntakeRotateControl(-1));
-    buttonBoard14.whileHeld(new IntakeRotateControl(1));
+    buttonBoard4.whileHeld(new IntakeRotateControl(-1));
+    buttonBoard5.whileHeld(new IntakeRotateControl(1));
 
     // Climb
-    // buttonBoard15.whenPressed();
+    // buttonBoard22.whenPressed();
 
     // Driver intake controls
     driverButtonRightBumper.whileHeld(new IntakePop());
