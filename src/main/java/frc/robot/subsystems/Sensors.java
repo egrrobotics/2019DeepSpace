@@ -23,7 +23,7 @@ public class Sensors extends Subsystem {
   private boolean usingTalonEncoders = true;	   		// <-- move constant to RobotMap (robot setup class)
 	private Encoder leftEncoder = null;	// <-- move constant to RobotMap (robot setup class)
 	private Encoder rightEncoder = null;	// <-- move constant to RobotMap (robot setup class)
-
+	public Encoder elevatorEncoder = new Encoder(RobotMap.elevatorEncoderA, RobotMap.elevatorEncoderB, false, Encoder.EncodingType.k4X);
 	//static Potentiometer pot = new AnalogPotentiometer(0, 360, 10); //Channel number for Analog input, scale factor 360 being the great, offset to add after scaling to prevent breakage (10 to 30 range) 
 	static AHRS navX;
 	int rightEncoderOffset = 0;
@@ -108,6 +108,10 @@ public class Sensors extends Subsystem {
 		return encoderValue;
 	}
 	
+	public double getElevatorEncoder() {
+		return elevatorEncoder.get();
+	}
+
 	public void switchDirection() {
 		Encoder temp = rightEncoder;
 		rightEncoder = leftEncoder;

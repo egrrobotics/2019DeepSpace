@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SandstormAuto;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
   public static Sensors sensors = new Sensors();
   public static Intake intake = new Intake();
   public static Pneumatics pneumatics = new Pneumatics();
+  public static Climber climber = new Climber();
   public static NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
   public static NetworkTable tapeTable;
 
@@ -68,6 +70,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Elevator encoder:", sensors.getElevatorEncoder());
   }
 
   /**
@@ -97,7 +100,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new SandstormAuto(SandstormAuto.AutoType.LEFT);
+    m_autonomousCommand = null; // new SandstormAuto(SandstormAuto.AutoType.LEFT);
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",

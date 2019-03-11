@@ -30,8 +30,8 @@ public class Pneumatics extends Subsystem {
   boolean intakeExtenderOpen = false;
 
   public Pneumatics() {
-    // compressor.start();
-    compressor.stop();
+    compressor.start();
+    // compressor.stop();
   }
 
   public void setIntakePop(boolean extended) {

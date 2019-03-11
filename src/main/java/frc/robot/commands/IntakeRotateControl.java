@@ -22,6 +22,7 @@ public class IntakeRotateControl extends Command {
   @Override
   protected void initialize() {
     Robot.intake.setRotatePower(power);
+    System.out.println("Intake rotate");
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -22,6 +22,7 @@ public class IntakeRollerControl extends Command {
   @Override
   protected void initialize() {
     Robot.intake.setRollerPower(power);
+    System.out.println("Intake roller");
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -16,14 +16,8 @@ public class ElevatorSetHeight extends InstantCommand {
 
   public ElevatorSetHeight(double target) {
     super();
-    requires(Robot.elevator);
+    // requires(Robot.elevator);
     this.target = target;
-  }
-
-  public ElevatorSetHeight(boolean up) {
-    super();
-    requires(Robot.elevator);
-    this.target = Robot.elevator.targetHeight + (up ? 12 : -12);
   }
 
   // Called once when the command executes

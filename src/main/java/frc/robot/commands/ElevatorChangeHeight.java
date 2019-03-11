@@ -7,26 +7,45 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ElevatorChangeHeight extends InstantCommand {
+public class ElevatorChangeHeight extends Command {
+  double speed;
   
-  double heightChange;
-  
-  public ElevatorChangeHeight(double heightChange) {
-    super();
+  public ElevatorChangeHeight(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.elevator);
+    // requires(Robot.elevator);
 
-    this.heightChange = heightChange;
+    this.speed = speed;
   }
 
-  // Called once when the command executes
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.elevator.setTargetHeight(Robot.elevator.getHeight() + heightChange);
   }
 
+  // Called repeatedly when this Command is scheduled to run
+  @Override
+  protected void execute() {
+    Robot.elevator.setTargetHeight(Robot.elevator.targetHeight + speed);
+  }
+
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
+
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
+  }
 }

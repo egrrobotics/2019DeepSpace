@@ -8,31 +8,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class ElevatorControl extends Command {
-
-  public ElevatorControl() {
+public class ElevatorSetPower extends Command {
+  double power;
+  
+  public ElevatorSetPower(double power) {
+    // Use requires() here to declare subsystem dependencies
     requires(Robot.elevator);
+    this.power = power;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.elevator.setPower(power);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // Prevent tipping
-    /*
-    if(Math.abs(Robot.sensors.getPitch()) > 10) {
-      Robot.elevator.setTargetHeight(500);
-    }
-    */
-
-    Robot.elevator.moveTowardTarget();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,6 +39,7 @@ public class ElevatorControl extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.elevator.setTargetHeight(Robot.sensors.getElevatorEncoder());
     Robot.elevator.setPower(0);
   }
 
@@ -51,6 +47,7 @@ public class ElevatorControl extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.elevator.setTargetHeight(Robot.sensors.getElevatorEncoder());
     Robot.elevator.setPower(0);
   }
 }

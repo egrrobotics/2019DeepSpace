@@ -11,8 +11,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ClimberHorizontal;
+import frc.robot.commands.ClimberVertical;
 import frc.robot.commands.DriveToTarget;
+import frc.robot.commands.ElevatorChangeHeight;
+import frc.robot.commands.ElevatorManual;
 import frc.robot.commands.ElevatorSetHeight;
+import frc.robot.commands.ElevatorSetPower;
 import frc.robot.commands.HatchGrabberToggle;
 import frc.robot.commands.IntakeExtenderToggle;
 import frc.robot.commands.IntakePop;
@@ -69,45 +74,62 @@ public class OI {
   private Button buttonBoard13 = new JoystickButton(buttonBoardPart2, 1);
   private Button buttonBoard14 = new JoystickButton(buttonBoardPart2, 2);
   private Button buttonBoard15 = new JoystickButton(buttonBoardPart2, 3);
-  private Button buttonBoard22 = new JoystickButton(buttonBoardPart2, 10);
+  private Button buttonBoard23 = new JoystickButton(buttonBoardPart2, 11);
+  private Button buttonBoard24 = new JoystickButton(buttonBoardPart2, 12);
 
   public OI() {
     // DriveTrain default command is ArcadeDrive
     // Elevator default command is ElevatorControl
 
     // Hatch presets
-    buttonBoard13.whenPressed(new ElevatorSetHeight(415));
-    buttonBoard11.whenPressed(new ElevatorSetHeight(1700)); // Also change height in Sandstorm
-    buttonBoard10.whenPressed(new ElevatorSetHeight(2930));
+    buttonBoard13.whenPressed(new ElevatorSetHeight(175105));
+    buttonBoard11.whenPressed(new ElevatorSetHeight(512317)); // Also change height in Sandstorm
+    // buttonBoard10.whenPressed(new ElevatorSetHeight(894277));
 
     // Ball presets
-    buttonBoard9.whenPressed(new ElevatorSetHeight(615));
-    buttonBoard8.whenPressed(new ElevatorSetHeight(1900));
-    buttonBoard7.whenPressed(new ElevatorSetHeight(3130));
+    buttonBoard9.whenPressed(new ElevatorSetHeight(276794));
+    buttonBoard8.whenPressed(new ElevatorSetHeight(639825));
+    // buttonBoard7.whenPressed(new ElevatorSetHeight(963412));
 
     // Ground, cargo bay presets
-    buttonBoard6.whenPressed(new ElevatorSetHeight(-50));
-    buttonBoard1.whenPressed(new ElevatorSetHeight(1500));
+    // buttonBoard6.whenPressed(new ElevatorSetHeight(-50));
+    // buttonBoard1.whenPressed(new ElevatorSetHeight(1500));
 
     // Elevator manual
-    buttonBoard15.whileHeld(new ElevatorSetHeight(true));
-    buttonBoard14.whileHeld(new ElevatorSetHeight(false));
+    buttonBoard24.whileHeld(new ElevatorSetPower(0.7));
+    buttonBoard23.whileHeld(new ElevatorSetPower(-0.6));
+    // buttonBoard24.whileHeld(new ElevatorManual(0.3));
+    // buttonBoard23.whileHeld(new ElevatorManual(-0.6));
 
     // Intake roller
-    buttonBoard3.whileHeld(new IntakeRollerControl(-1));
-    buttonBoard2.whileHeld(new IntakeRollerControl(1));
+    buttonBoard5.whileHeld(new IntakeRollerControl(-1));
+    buttonBoard4.whileHeld(new IntakeRollerControl(1));
 
     // Intake open/close
-    buttonBoard4.whileHeld(new IntakeRotateControl(-1));
-    buttonBoard5.whileHeld(new IntakeRotateControl(1));
+    buttonBoard3.whileHeld(new IntakeRotateControl(-1));
+    buttonBoard2.whileHeld(new IntakeRotateControl(1));
+
+    // Operator Xbox controller (backup)
+    operatorButtonA.whileHeld(new IntakeRollerControl(-1));
+    operatorButtonB.whileHeld(new IntakeRollerControl(1));
+    operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
+    operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
+    // operatorButtonY.whileHeld(new ElevatorManual(0.3)); // 0.9
+    // operatorButtonX.whileHeld(new ElevatorManual(-0.2)); // -0.8
+
+    /*
+    operatorButtonBack.whileHeld(new ClimberVertical(1));
+    operatorButtonLeftAxisPress.whileHeld(new ClimberHorizontal(1));
+    operatorButtonStart.whileHeld(new ClimberVertical(-1));
+    */
 
     // Climb
     // buttonBoard22.whenPressed();
 
     // Driver intake controls
     driverButtonRightBumper.whileHeld(new IntakePop());
-    driverButtonLeftBumper.whenPressed(new IntakeExtenderToggle());
-    driverButtonB.whenPressed(new HatchGrabberToggle());
+    driverButtonLeftBumper.whenPressed(new HatchGrabberToggle());
+    // driverButtonB.whenPressed(new IntakeExtenderToggle());
 
     // Driver vision
     driverButtonA.whileHeld(new DriveToTarget());

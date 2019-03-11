@@ -26,21 +26,27 @@ public class RobotMap {
   public static double encoderCountsPerInch = 222;
 
   // Drivetrain Talons
-  public static int driveLeft1 = 2;
-  public static int driveLeft2 = 3;
-  public static int driveRight1 = 4;
-  public static int driveRight2 = 5;
+  public static int driveRight1 = 3;
+  public static int driveRight2 = 4;
+  public static int driveLeft1 = 5;
+  public static int driveLeft2 = 6;
 
   // Elevator Talons
-  public static int elevator = 6;
+  public static int elevator = 7;
+  public static int elevatorEncoderA = 0;
+  public static int elevatorEncoderB = 1;
 
   // Intake Talons
-  public static int intakeRoller = 7;
   public static int intakeRotate = 8;
+  public static int intakeRoller = 9;
+
+  // Climber talons
+  public static int climberVertical = 10;
+  public static int climberHorizontal = 11;
 
   // Pneumatic IDs
-  public static int PCM = 1;
+  public static int PCM = 0;
   public static int popperSolenoid = 0;
-  public static int hatchGrabberSolenoid = 1;
-  public static int intakeExtenderSolenoid = 2;
+  public static int hatchGrabberSolenoid = 2;
+  public static int intakeExtenderSolenoid = 1;
 }

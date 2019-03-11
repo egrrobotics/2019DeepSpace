@@ -10,7 +10,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorControl;
 
@@ -20,14 +23,18 @@ import frc.robot.commands.ElevatorControl;
 public class Elevator extends Subsystem {
 
   public TalonSRX elevatorMotor = new TalonSRX(RobotMap.elevator);
+ 
   public double targetHeight = 0;
 
   public Elevator() {}
 
   public void setPower(double power) {
+    SmartDashboard.putNumber("Elevator power:", power);
+    SmartDashboard.putNumber("Elevator target:", targetHeight);
+
     // Min/max
-    power = Math.min(0.5, power);
-    power = Math.max(-0.5, power);
+    power = Math.min(0.8, power);
+    power = Math.max(-0.8, power);
 
     // Deadband
     if (Math.abs(power) < 0.1) {
@@ -36,22 +43,18 @@ public class Elevator extends Subsystem {
       power = (power < 0) ? -0.2 : 0.2;
     }
 
-    elevatorMotor.set(ControlMode.PercentOutput, -power);
-  }
-
-  public double getHeight() {
-    return -elevatorMotor.getSelectedSensorPosition();
+    elevatorMotor.set(ControlMode.PercentOutput, power);
   }
 
   public void setTargetHeight(double height) {
-    double min = -500;
-    double max = 3200;
+    double min = -1000;
+    double max = 1000000;
     targetHeight = Math.max(min, Math.min(max, height));
   }
 
   public void moveTowardTarget() {
-    double error = targetHeight - getHeight();
-    double power = error * 0.005;
+    double error = targetHeight - Robot.sensors.getElevatorEncoder();
+    double power = error * 0.00001;
     setPower(power);
   }
 
