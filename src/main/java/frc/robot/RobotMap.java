@@ -41,8 +41,8 @@ public class RobotMap {
   public static int intakeRoller = 9;
 
   // Climber talons
-  public static int climberVertical = 10;
-  public static int climberHorizontal = 11;
+  public static int climberVertical = 11;
+  public static int climberHorizontal = 10;
 
   // Pneumatic IDs
   public static int PCM = 0;

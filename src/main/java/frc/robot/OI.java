@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Climb;
 import frc.robot.commands.ClimberHorizontal;
 import frc.robot.commands.ClimberVertical;
 import frc.robot.commands.DriveToTarget;
@@ -18,6 +19,7 @@ import frc.robot.commands.ElevatorChangeHeight;
 import frc.robot.commands.ElevatorManual;
 import frc.robot.commands.ElevatorSetHeight;
 import frc.robot.commands.ElevatorSetPower;
+import frc.robot.commands.ForceDriveForward;
 import frc.robot.commands.HatchGrabberToggle;
 import frc.robot.commands.IntakeExtenderToggle;
 import frc.robot.commands.IntakePop;
@@ -98,32 +100,27 @@ public class OI {
     // Elevator manual
     buttonBoard24.whileHeld(new ElevatorSetPower(0.7));
     buttonBoard23.whileHeld(new ElevatorSetPower(-0.6));
-    // buttonBoard24.whileHeld(new ElevatorManual(0.3));
-    // buttonBoard23.whileHeld(new ElevatorManual(-0.6));
 
     // Intake roller
     buttonBoard5.whileHeld(new IntakeRollerControl(-1));
     buttonBoard4.whileHeld(new IntakeRollerControl(1));
 
     // Intake open/close
-    buttonBoard3.whileHeld(new IntakeRotateControl(-1));
-    buttonBoard2.whileHeld(new IntakeRotateControl(1));
+    buttonBoard2.whileHeld(new IntakeRotateControl(-1));
+    buttonBoard3.whileHeld(new IntakeRotateControl(1));
 
-    // Operator Xbox controller (backup)
-    operatorButtonA.whileHeld(new IntakeRollerControl(-1));
-    operatorButtonB.whileHeld(new IntakeRollerControl(1));
-    operatorButtonLeftBumper.whileHeld(new IntakeRotateControl(1));
-    operatorButtonRightBumper.whileHeld(new IntakeRotateControl(-1));
-    // operatorButtonY.whileHeld(new ElevatorManual(0.3)); // 0.9
-    // operatorButtonX.whileHeld(new ElevatorManual(-0.2)); // -0.8
-
-    /*
-    operatorButtonBack.whileHeld(new ClimberVertical(1));
-    operatorButtonLeftAxisPress.whileHeld(new ClimberHorizontal(1));
-    operatorButtonStart.whileHeld(new ClimberVertical(-1));
-    */
+    // Operator Xbox controller
+    operatorButtonA.whileHeld(new ClimberVertical(-1.0)); // Expand
+    operatorButtonB.whileHeld(new ClimberVertical(1.0)); // Contract
+    operatorButtonX.whileHeld(new ClimberHorizontal(-0.2));
+    operatorButtonLeftBumper.whileHeld(new ForceDriveForward(-0.3));
+    operatorButtonRightBumper.whileHeld(new ForceDriveForward(0.3));
+    operatorButtonStart.whileHeld(new ElevatorSetPower(-0.15));
 
     // Climb
+    driverButtonStart.whileHeld(new Climb(-1.0, -0.15, 1));
+    driverButtonX.whileHeld(new ClimberHorizontal(-0.2));
+    driverButtonBack.whileHeld(new ClimberVertical(1.0));
     // buttonBoard22.whenPressed();
 
     // Driver intake controls

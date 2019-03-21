@@ -71,6 +71,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Elevator encoder:", sensors.getElevatorEncoder());
+    SmartDashboard.putNumber("Climber vertical encoder:", Robot.climber.verticalMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Climber horizontal encoder:", Robot.climber.horizontalMotor.getSelectedSensorPosition());
   }
 
   /**

@@ -33,6 +33,13 @@ public class ClimberVertical extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    double encoderPos = Robot.climber.verticalMotor.getSelectedSensorPosition();
+    if ((power < 0) && (encoderPos < -7229539)) {
+      return true;
+    }
+    if ((power > 0) && (encoderPos > 5000)) {
+      return true;
+    }
     return false;
   }
 
